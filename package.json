@@ -1,0 +1,21 @@
+{
+  "name": "my-career-plot",
+  "version": "1.0.0",
+  "description": "AI-powered career guidance platform for India",
+  "scripts": {
+    "install:all": "cd frontend && npm install && cd ../backend && npm install",
+    "dev:frontend": "cd frontend && npm run dev",
+    "dev:backend": "cd backend && npm run dev",
+    "build:frontend": "cd frontend && npm run build",
+    "build:backend": "cd backend && npm run build"
+  },
+  "keywords": [
+    "career",
+    "ai",
+    "guidance",
+    "jobs",
+    "resume"
+  ],
+  "author": "Anish Debnath & Pilat Debbarma",
+  "license": "MIT"
+}
