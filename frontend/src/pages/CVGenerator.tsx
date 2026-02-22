@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 import { useState, useEffect } from 'react';
 import Navbar from '../components/Navbar';
 import LoadingSpinner from '../components/LoadingSpinner';
-import { FileText, Download, Sparkles, User, Briefcase, GraduationCap, Award, Code, Lightbulb } from 'lucide-react';
+import { FileText, Download, Sparkles, User, Code, Lightbulb } from 'lucide-react';
 import toast from 'react-hot-toast';
 import axios from 'axios';
 

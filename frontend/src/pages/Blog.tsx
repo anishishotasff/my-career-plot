@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import Navbar from '../components/Navbar';
-import { Linkedin, Github, Globe, Users, Code, Rocket, Briefcase, GraduationCap, TrendingUp } from 'lucide-react';
+import { Linkedin, Github, Globe, Users, Code, Rocket, Briefcase, GraduationCap } from 'lucide-react';
 
 const Blog = () => {
   const founders = [
