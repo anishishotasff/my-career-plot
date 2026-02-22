@@ -62,7 +62,6 @@ const CVGenerator = () => {
     projects: [{ name: '', description: '', technologies: '' }],
   });
   const [skillInput, setSkillInput] = useState('');
-  const [certInput, setCertInput] = useState('');
   const [generatedCV, setGeneratedCV] = useState<string>('');
 
   // Debounce timer for suggestions
@@ -105,27 +104,6 @@ const CVGenerator = () => {
     setSuggestions([]);
   };
 
-  const handleAddExperience = () => {
-    setCvData({
-      ...cvData,
-      experience: [...cvData.experience, { title: '', company: '', location: '', startDate: '', endDate: '', description: '' }],
-    });
-  };
-
-  const handleAddEducation = () => {
-    setCvData({
-      ...cvData,
-      education: [...cvData.education, { degree: '', institution: '', year: '', grade: '' }],
-    });
-  };
-
-  const handleAddProject = () => {
-    setCvData({
-      ...cvData,
-      projects: [...cvData.projects, { name: '', description: '', technologies: '' }],
-    });
-  };
-
   const handleAddSkill = () => {
     if (skillInput.trim()) {
       setCvData({
@@ -133,16 +111,6 @@ const CVGenerator = () => {
         skills: [...cvData.skills, skillInput.trim()],
       });
       setSkillInput('');
-    }
-  };
-
-  const handleAddCertification = () => {
-    if (certInput.trim()) {
-      setCvData({
-        ...cvData,
-        certifications: [...cvData.certifications, certInput.trim()],
-      });
-      setCertInput('');
     }
   };
 
@@ -335,7 +303,7 @@ const CVGenerator = () => {
               placeholder="Add a skill"
               value={skillInput}
               onChange={(e) => setSkillInput(e.target.value)}
-              onKeyPress={(e) => e.key === 'Enter' && handleAddSkill()}
+              onKeyDown={(e) => e.key === 'Enter' && handleAddSkill()}
               className="flex-1 px-4 py-3 bg-dark-900/50 border border-white/10 rounded-xl text-dark-50 placeholder-dark-400 focus:outline-none focus:border-primary-500"
             />
             <button
