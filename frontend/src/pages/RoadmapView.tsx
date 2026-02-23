@@ -16,6 +16,34 @@ const RoadmapView = () => {
   const [loading, setLoading] = useState(true);
   const [completedSkills, setCompletedSkills] = useState<string[]>([]);
 
+  // Helper function to get URL for resource names
+  const getResourceUrl = (resourceName: string): string => {
+    const resourceMap: { [key: string]: string } = {
+      'freeCodeCamp': 'https://www.freecodecamp.org/',
+      'MDN Web Docs': 'https://developer.mozilla.org/',
+      'YouTube': 'https://www.youtube.com/',
+      'Codecademy': 'https://www.codecademy.com/',
+      'React Documentation': 'https://react.dev/',
+      'Udemy': 'https://www.udemy.com/',
+      'Coursera': 'https://www.coursera.org/',
+      'Scrimba': 'https://scrimba.com/',
+      'Vercel': 'https://vercel.com/docs',
+      'Netlify': 'https://www.netlify.com/',
+      'GitHub Actions': 'https://github.com/features/actions',
+      'LeetCode': 'https://leetcode.com/',
+      'Pluralsight': 'https://www.pluralsight.com/',
+      'LinkedIn Learning': 'https://www.linkedin.com/learning/',
+      'edX': 'https://www.edx.org/',
+      'Khan Academy': 'https://www.khanacademy.org/',
+      'W3Schools': 'https://www.w3schools.com/',
+      'GeeksforGeeks': 'https://www.geeksforgeeks.org/',
+      'HackerRank': 'https://www.hackerrank.com/',
+      'Codewars': 'https://www.codewars.com/',
+    };
+    
+    return resourceMap[resourceName] || `https://www.google.com/search?q=${encodeURIComponent(resourceName)}`;
+  };
+
   useEffect(() => {
     const fetchRoadmap = async () => {
       if (!careerName) {
@@ -160,14 +188,25 @@ const RoadmapView = () => {
                     Learning Resources
                   </h4>
                   <div className="flex flex-wrap gap-2">
-                    {phase.data.resources.map((resource, i) => (
-                      <span
-                        key={i}
-                        className="px-3 py-1 bg-primary-500/10 border border-primary-500/20 rounded-lg text-primary-300 text-sm"
-                      >
-                        {resource}
-                      </span>
-                    ))}
+                    {phase.data.resources.map((resource, i) => {
+                      // Support both string and object formats
+                      const isObject = typeof resource === 'object' && resource !== null;
+                      const name = isObject ? resource.name : resource;
+                      const url = isObject ? resource.url : getResourceUrl(resource);
+                      
+                      return (
+                        <a
+                          key={i}
+                          href={url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="px-3 py-1 bg-primary-500/10 border border-primary-500/20 rounded-lg text-primary-300 text-sm hover:bg-primary-500/20 hover:border-primary-500/40 transition-all flex items-center gap-1 group"
+                        >
+                          {name}
+                          <ExternalLink className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" />
+                        </a>
+                      );
+                    })}
                   </div>
                 </div>
               </div>

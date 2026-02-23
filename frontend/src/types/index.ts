@@ -23,11 +23,16 @@ export interface CareerResponse {
   career_matches: CareerMatch[];
 }
 
+export interface Resource {
+  name: string;
+  url: string;
+}
+
 export interface RoadmapPhase {
   duration: string;
   focus: string;
   skills: string[];
-  resources: string[];
+  resources: Resource[] | string[]; // Support both formats
 }
 
 export interface Roadmap {

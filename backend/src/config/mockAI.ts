@@ -57,19 +57,34 @@ export const callMockAI = async (systemPrompt: string, userPrompt: string): Prom
           "duration": "0-3 months",
           "focus": "Foundation Building",
           "skills": ["Core JavaScript", "HTML5 & CSS3", "Git & GitHub", "Basic React", "Responsive Design"],
-          "resources": ["freeCodeCamp", "MDN Web Docs", "YouTube", "Codecademy"]
+          "resources": [
+            { "name": "freeCodeCamp", "url": "https://www.freecodecamp.org/" },
+            { "name": "MDN Web Docs", "url": "https://developer.mozilla.org/" },
+            { "name": "YouTube - Traversy Media", "url": "https://www.youtube.com/@TraversyMedia" },
+            { "name": "Codecademy", "url": "https://www.codecademy.com/" }
+          ]
         },
         "phase_2": {
           "duration": "3-6 months",
           "focus": "Advanced Development",
           "skills": ["Advanced React", "State Management", "REST APIs", "Node.js Basics", "Database Fundamentals"],
-          "resources": ["React Documentation", "Udemy", "Coursera", "Scrimba"]
+          "resources": [
+            { "name": "React Documentation", "url": "https://react.dev/" },
+            { "name": "Udemy", "url": "https://www.udemy.com/" },
+            { "name": "Coursera", "url": "https://www.coursera.org/" },
+            { "name": "Scrimba", "url": "https://scrimba.com/" }
+          ]
         },
         "phase_3": {
           "duration": "6-12 months",
           "focus": "Professional Skills",
           "skills": ["Full Stack Integration", "Testing", "Deployment", "CI/CD", "System Design"],
-          "resources": ["Vercel", "Netlify", "GitHub Actions", "LeetCode"]
+          "resources": [
+            { "name": "Vercel Docs", "url": "https://vercel.com/docs" },
+            { "name": "Netlify", "url": "https://www.netlify.com/" },
+            { "name": "GitHub Actions", "url": "https://github.com/features/actions" },
+            { "name": "LeetCode", "url": "https://leetcode.com/" }
+          ]
         },
         "certifications": [
           "Meta Front-End Developer Certificate",
