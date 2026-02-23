@@ -12,7 +12,6 @@ import {
   Clock,
   Edit,
   Download,
-  Share2,
   Calendar,
   MapPin,
   DollarSign,
