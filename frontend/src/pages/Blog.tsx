@@ -10,14 +10,16 @@ const Blog = () => {
       linkedin: 'https://www.linkedin.com/in/anishishotasff',
       github: 'https://github.com/anishishotasff',
       portfolio: 'https://anishishotasf.vercel.app/',
-      image: '👨‍💻',
+      image: '/images/anish.jpg', // Add your photo to frontend/public/images/
+      fallbackEmoji: '👨‍💻',
     },
     {
       name: 'Pilat Debbarma',
       role: 'Co-Founder & Full Stack Developer',
       linkedin: 'https://www.linkedin.com/in/pilat-debbarma-a893763aa',
       github: 'https://github.com/Pilat143',
-      image: '👨‍💻',
+      image: '/images/pilat.jpg', // Add the dog photo here
+      fallbackEmoji: '👨‍💻',
     },
   ];
 
@@ -141,7 +143,25 @@ const Blog = () => {
                 className="glass glass-hover rounded-2xl p-8"
               >
                 <div className="text-center mb-6">
-                  <div className="text-6xl mb-4">{founder.image}</div>
+                  {founder.image.startsWith('/') ? (
+                    <div className="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden border-4 border-primary-500/30">
+                      <img
+                        src={founder.image}
+                        alt={founder.name}
+                        className="w-full h-full object-cover"
+                        onError={(e) => {
+                          // Fallback to emoji if image fails to load
+                          e.currentTarget.style.display = 'none';
+                          const parent = e.currentTarget.parentElement;
+                          if (parent) {
+                            parent.innerHTML = `<div class="w-full h-full flex items-center justify-center text-6xl bg-gradient-to-br from-primary-500 to-purple-600">${founder.fallbackEmoji}</div>`;
+                          }
+                        }}
+                      />
+                    </div>
+                  ) : (
+                    <div className="text-6xl mb-4">{founder.image}</div>
+                  )}
                   <h3 className="text-2xl font-bold text-dark-50 mb-2">{founder.name}</h3>
                   <p className="text-primary-400 font-medium">{founder.role}</p>
                 </div>
