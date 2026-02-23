@@ -11,6 +11,7 @@ import ResumeAnalyzer from './pages/ResumeAnalyzer';
 import Blog from './pages/Blog';
 import JobFinder from './pages/JobFinder';
 import CVGenerator from './pages/CVGenerator';
+import UserProfile from './pages/UserProfile';
 import AIAssistant from './components/AIAssistant';
 
 function App() {
@@ -46,6 +47,7 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/profile" element={<ProfileForm />} />
+            <Route path="/my-profile" element={<UserProfile />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/roadmap/:careerName" element={<RoadmapView />} />
             <Route path="/resume" element={<ResumeAnalyzer />} />

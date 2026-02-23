@@ -19,7 +19,7 @@ const Navbar = () => {
 
   const navItems = [
     { path: '/', label: 'Home', icon: Home },
-    { path: '/profile', label: 'Profile', icon: User },
+    { path: '/my-profile', label: 'My Profile', icon: User },
     { path: '/jobs', label: 'Jobs', icon: Briefcase },
     { path: '/cv-generator', label: 'CV Generator', icon: FilePlus },
     { path: '/resume', label: 'Resume', icon: FileText },
