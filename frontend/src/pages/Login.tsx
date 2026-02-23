@@ -51,7 +51,13 @@ const Login = () => {
       navigate('/profile');
     } catch (error: any) {
       console.error('Google login error:', error);
-      toast.error('Failed to login with Google');
+      
+      // Show specific error message
+      if (error.message) {
+        toast.error(error.message);
+      } else {
+        toast.error('Failed to login with Google. Please try again.');
+      }
     } finally {
       setLoading(false);
     }
