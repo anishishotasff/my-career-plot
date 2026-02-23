@@ -117,6 +117,158 @@ export const callMockAI = async (systemPrompt: string, userPrompt: string): Prom
         "Use strong action verbs at the start of bullet points (Developed, Implemented, Optimized, Led)"
       ]
     });
+  } else if (userPrompt.includes('Assistant:') || systemPrompt.includes('Career Assistant')) {
+    // AI Assistant chat response
+    const userMessage = userPrompt.toLowerCase();
+    
+    if (userMessage.includes('resume') || userMessage.includes('cv')) {
+      return `Great question about resumes! Here are some key tips for creating an ATS-friendly resume:
+
+✓ Use a clean, simple format without tables or graphics
+✓ Start with a strong professional summary
+✓ Quantify your achievements with numbers (e.g., "Increased sales by 30%")
+✓ Include relevant keywords from the job description
+✓ Use standard section headings (Experience, Education, Skills)
+✓ Keep it to 1-2 pages maximum
+✓ Save as .docx or .pdf format
+
+Try our Resume Analyzer tool to get a detailed ATS score and personalized feedback on your resume!`;
+    }
+    
+    if (userMessage.includes('job') || userMessage.includes('career') || userMessage.includes('work')) {
+      return `I can definitely help you with your career journey! Here's my advice:
+
+🎯 Career Planning:
+• Use our Profile Analysis to discover careers matching your skills
+• Check the Jobs section for latest opportunities across all industries
+• Build a strong online presence (LinkedIn, GitHub for tech roles)
+
+📝 Job Search Strategy:
+• Tailor your resume for each application
+• Network actively - 70% of jobs are filled through networking
+• Apply to 10-15 jobs per week consistently
+• Follow up on applications after 1 week
+
+💼 Interview Prep:
+• Research the company thoroughly
+• Practice STAR method for behavioral questions
+• Prepare 3-5 questions to ask the interviewer
+
+What specific aspect would you like to focus on?`;
+    }
+    
+    if (userMessage.includes('interview')) {
+      return `Interview preparation is crucial for success! Here's a comprehensive guide:
+
+🎯 Before the Interview:
+• Research the company, its products, and recent news
+• Review the job description and match your experience
+• Prepare 5-7 STAR method examples
+• Practice common questions with a friend
+• Plan your outfit and route (arrive 10-15 mins early)
+
+💬 During the Interview:
+• Make eye contact and smile
+• Listen carefully before answering
+• Use specific examples from your experience
+• Ask thoughtful questions about the role and team
+• Show enthusiasm for the opportunity
+
+📧 After the Interview:
+• Send a thank-you email within 24 hours
+• Reiterate your interest in the role
+• Follow up after 1 week if no response
+
+Would you like tips for any specific type of interview (technical, behavioral, HR)?`;
+    }
+    
+    if (userMessage.includes('salary') || userMessage.includes('lpa') || userMessage.includes('pay')) {
+      return `Salary expectations in India vary by role, experience, and location. Here's a realistic guide:
+
+💰 By Experience Level:
+• Entry-level (0-2 years): 3-6 LPA
+• Mid-level (3-5 years): 6-15 LPA
+• Senior (5-10 years): 15-30 LPA
+• Leadership (10+ years): 30+ LPA
+
+📊 Factors Affecting Salary:
+• Industry (Tech, Finance, Consulting pay higher)
+• Location (Bangalore, Mumbai, Delhi pay 20-30% more)
+• Company size (MNCs typically pay more than startups)
+• Your specific skills and expertise
+• Negotiation skills
+
+💡 Negotiation Tips:
+• Research market rates on Glassdoor, AmbitionBox
+• Know your worth - list your achievements
+• Consider total compensation (bonus, stocks, benefits)
+• Be prepared to justify your ask with data
+• Don't accept the first offer immediately
+
+Use our Career Analysis tool to get salary insights for specific roles!`;
+    }
+    
+    if (userMessage.includes('skill') || userMessage.includes('learn') || userMessage.includes('course')) {
+      return `Skill development is key to career growth! Here's how to approach it:
+
+🎯 Identify Skills to Learn:
+• Check job descriptions for your target role
+• Use our Career Matching tool to find skill gaps
+• Focus on high-demand skills in your industry
+
+📚 Learning Resources:
+• Free: YouTube, freeCodeCamp, Coursera (audit mode)
+• Paid: Udemy, Pluralsight, LinkedIn Learning
+• Practice: LeetCode, HackerRank, GitHub projects
+
+⏰ Learning Strategy:
+• Dedicate 1-2 hours daily consistently
+• Build projects to apply what you learn
+• Join communities (Discord, Reddit, LinkedIn groups)
+• Share your learning journey on social media
+
+🏆 Certifications Worth Pursuing:
+• Tech: AWS, Google Cloud, Microsoft Azure
+• Data: Google Data Analytics, IBM Data Science
+• Business: Google Project Management, HubSpot
+• Design: Google UX Design, Adobe Certified
+
+Check our Roadmap View for structured learning paths!`;
+    }
+    
+    if (userMessage.includes('hello') || userMessage.includes('hi') || userMessage.includes('hey')) {
+      return `Hello! 👋 I'm your Career Assistant, here to help you succeed!
+
+I can assist you with:
+• 🎯 Career planning and guidance
+• 💼 Job search strategies
+• 📝 Resume and cover letter tips
+• 🎤 Interview preparation
+• 📚 Skill development advice
+• 💰 Salary negotiation tips
+• 🏢 Industry insights
+
+What would you like to know more about today?`;
+    }
+    
+    // Default response
+    return `I'm here to help with your career! I can provide guidance on:
+
+• Career planning and path selection
+• Job search and application strategies
+• Resume writing and optimization
+• Interview preparation and tips
+• Skill development and learning resources
+• Salary expectations and negotiation
+• Industry trends and insights
+
+You can also explore our platform features:
+• Profile Analysis - Find careers matching your skills
+• Jobs Section - Browse latest opportunities
+• Resume Analyzer - Get ATS score and feedback
+• Roadmap View - Structured learning paths
+
+What specific area would you like help with?`;
   }
   
   // Default response
