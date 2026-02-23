@@ -33,7 +33,13 @@ app.use(limiter);
 
 // CORS configuration
 app.use(cors({
-  origin: process.env.FRONTEND_URL || 'http://localhost:5173',
+  origin: [
+    'http://localhost:5173',
+    'http://localhost:5174',
+    'https://my-career-plot.vercel.app',
+    'https://my-career-plot-git-main-anishishotasff.vercel.app',
+    /\.vercel\.app$/
+  ],
   credentials: true
 }));
 
