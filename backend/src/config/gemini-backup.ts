@@ -86,35 +86,20 @@ export const callMockAI = async (systemPrompt: string, userPrompt: string): Prom
       }
     });
   } else if (userPrompt.includes('Analyze this resume')) {
-    // Resume analysis response - calculate dynamic ATS score based on content
-    const resumeText = userPrompt.toLowerCase();
-    let atsScore = 50; // Base score
-    
-    // Check for key elements that improve ATS score
-    if (resumeText.includes('experience') || resumeText.includes('worked')) atsScore += 10;
-    if (resumeText.includes('project') || resumeText.includes('developed')) atsScore += 8;
-    if (resumeText.includes('education') || resumeText.includes('degree')) atsScore += 7;
-    if (resumeText.includes('skill') || resumeText.includes('technology')) atsScore += 10;
-    if (resumeText.includes('achievement') || resumeText.includes('improved')) atsScore += 8;
-    if (resumeText.includes('team') || resumeText.includes('collaboration')) atsScore += 5;
-    if (resumeText.includes('github') || resumeText.includes('portfolio')) atsScore += 7;
-    
-    // Cap at 95 (perfect scores are rare)
-    atsScore = Math.min(atsScore, 95);
-    
+    // Resume analysis response
     return JSON.stringify({
-      "detected_skills": ["JavaScript", "React", "Node.js", "HTML", "CSS", "Git", "MongoDB", "Express", "Problem Solving", "Communication"],
-      "missing_skills": ["TypeScript", "Testing (Jest/Mocha)", "Docker", "AWS/Cloud", "CI/CD", "System Design", "Microservices", "GraphQL"],
-      "ats_score": atsScore,
-      "keyword_suggestions": ["TypeScript", "Jest", "React Testing Library", "AWS Lambda", "Docker", "Kubernetes", "Agile/Scrum"],
+      "detected_skills": ["JavaScript", "React", "Node.js", "HTML", "CSS", "Git", "MongoDB", "Express"],
+      "missing_skills": ["TypeScript", "Testing", "Docker", "AWS", "CI/CD", "System Design", "Microservices"],
+      "ats_score": 72,
+      "keyword_suggestions": ["TypeScript", "Jest", "React Testing Library", "AWS Lambda", "Docker", "Kubernetes", "Agile"],
       "improvement_points": [
-        "Add quantifiable achievements with metrics (e.g., 'Improved performance by 40%', 'Reduced load time by 2 seconds')",
-        "Include TypeScript experience - it's highly sought after in modern development roles",
-        "Add testing frameworks and methodologies (Jest, React Testing Library, TDD)",
-        "Mention cloud platform experience (AWS, Azure, or GCP) with specific services used",
-        "Include soft skills like team collaboration, leadership, and communication",
-        "Add links to GitHub portfolio with live project demos",
-        "Use strong action verbs at the start of bullet points (Developed, Implemented, Optimized, Led)"
+        "Add quantifiable achievements (e.g., 'Improved performance by 40%')",
+        "Include TypeScript experience to match modern job requirements",
+        "Add testing frameworks and methodologies",
+        "Mention cloud platform experience (AWS, Azure, or GCP)",
+        "Include soft skills like team collaboration and leadership",
+        "Add links to GitHub portfolio and live projects",
+        "Use action verbs at the start of bullet points"
       ]
     });
   }

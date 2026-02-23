@@ -125,19 +125,51 @@ const ResumeAnalyzer = () => {
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
-              className="glass rounded-2xl p-8 text-center"
+              className="glass rounded-2xl p-8"
             >
-              <h3 className="text-lg text-dark-300 mb-4">ATS Compatibility Score</h3>
-              <div className={`text-6xl font-bold mb-4 ${getScoreColor(analysis.ats_score)}`}>
-                {analysis.ats_score}%
+              <div className="text-center mb-6">
+                <h3 className="text-lg text-dark-300 mb-4">ATS Compatibility Score</h3>
+                <div className={`text-7xl font-bold mb-2 ${getScoreColor(analysis.ats_score)}`}>
+                  {analysis.ats_score}%
+                </div>
+                <p className="text-dark-400 text-sm">
+                  {analysis.ats_score >= 80 ? 'Excellent! Your resume is highly ATS-friendly' :
+                   analysis.ats_score >= 60 ? 'Good, but there\'s room for improvement' :
+                   'Needs improvement to pass ATS screening'}
+                </p>
               </div>
-              <div className="max-w-md mx-auto h-3 bg-dark-800 rounded-full overflow-hidden">
-                <motion.div
-                  initial={{ width: 0 }}
-                  animate={{ width: `${analysis.ats_score}%` }}
-                  transition={{ duration: 1, delay: 0.3 }}
-                  className={`h-full bg-gradient-to-r ${getScoreGradient(analysis.ats_score)}`}
-                />
+              
+              <div className="max-w-md mx-auto mb-6">
+                <div className="h-4 bg-dark-800 rounded-full overflow-hidden">
+                  <motion.div
+                    initial={{ width: 0 }}
+                    animate={{ width: `${analysis.ats_score}%` }}
+                    transition={{ duration: 1, delay: 0.3 }}
+                    className={`h-full bg-gradient-to-r ${getScoreGradient(analysis.ats_score)}`}
+                  />
+                </div>
+              </div>
+
+              {/* ATS Score Breakdown */}
+              <div className="grid grid-cols-3 gap-4 mt-6">
+                <div className="text-center p-4 bg-dark-900/50 rounded-xl">
+                  <div className="text-2xl font-bold text-green-400">
+                    {analysis.detected_skills.length}
+                  </div>
+                  <div className="text-xs text-dark-400 mt-1">Skills Found</div>
+                </div>
+                <div className="text-center p-4 bg-dark-900/50 rounded-xl">
+                  <div className="text-2xl font-bold text-red-400">
+                    {analysis.missing_skills.length}
+                  </div>
+                  <div className="text-xs text-dark-400 mt-1">Skills Missing</div>
+                </div>
+                <div className="text-center p-4 bg-dark-900/50 rounded-xl">
+                  <div className="text-2xl font-bold text-primary-400">
+                    {analysis.keyword_suggestions.length}
+                  </div>
+                  <div className="text-xs text-dark-400 mt-1">Keywords to Add</div>
+                </div>
               </div>
             </motion.div>
 
@@ -230,11 +262,46 @@ const ResumeAnalyzer = () => {
               </ul>
             </motion.div>
 
+            {/* ATS Tips */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.6 }}
+              className="glass rounded-2xl p-6 bg-gradient-to-br from-primary-500/10 to-purple-600/10 border border-primary-500/20"
+            >
+              <h3 className="text-xl font-bold text-dark-50 mb-4 flex items-center">
+                <TrendingUp className="w-5 h-5 mr-2 text-primary-400" />
+                ATS Optimization Tips
+              </h3>
+              <div className="grid md:grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <h4 className="font-semibold text-primary-300 text-sm">✓ DO</h4>
+                  <ul className="text-sm text-dark-300 space-y-1">
+                    <li>• Use standard section headings (Experience, Education, Skills)</li>
+                    <li>• Include relevant keywords from job description</li>
+                    <li>• Use simple, clean formatting</li>
+                    <li>• Add quantifiable achievements</li>
+                    <li>• Save as .docx or .pdf format</li>
+                  </ul>
+                </div>
+                <div className="space-y-2">
+                  <h4 className="font-semibold text-red-300 text-sm">✗ DON'T</h4>
+                  <ul className="text-sm text-dark-300 space-y-1">
+                    <li>• Use tables, images, or graphics</li>
+                    <li>• Include headers/footers with important info</li>
+                    <li>• Use unusual fonts or colors</li>
+                    <li>• Stuff keywords unnaturally</li>
+                    <li>• Use abbreviations without spelling out</li>
+                  </ul>
+                </div>
+              </div>
+            </motion.div>
+
             {/* Analyze Another */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ delay: 0.6 }}
+              transition={{ delay: 0.7 }}
               className="text-center"
             >
               <button
