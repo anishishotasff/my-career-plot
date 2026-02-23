@@ -1,18 +1,20 @@
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { useParams, useNavigate } from 'react-router-dom';
-import { ArrowLeft, BookOpen, Award, Lightbulb, ExternalLink } from 'lucide-react';
+import { ArrowLeft, BookOpen, Award, Lightbulb, ExternalLink, CheckCircle, Circle } from 'lucide-react';
 import toast from 'react-hot-toast';
 import Navbar from '../components/Navbar';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { generateRoadmap } from '../services/api';
 import { Roadmap } from '../types';
+import { initializeRoadmapProgress, updateSkillProgress, getRoadmapProgress } from '../utils/progressTracker';
 
 const RoadmapView = () => {
   const { careerName } = useParams<{ careerName: string }>();
   const navigate = useNavigate();
   const [roadmap, setRoadmap] = useState<Roadmap | null>(null);
   const [loading, setLoading] = useState(true);
+  const [completedSkills, setCompletedSkills] = useState<string[]>([]);
 
   useEffect(() => {
     const fetchRoadmap = async () => {
@@ -24,6 +26,15 @@ const RoadmapView = () => {
       try {
         const result = await generateRoadmap(decodeURIComponent(careerName));
         setRoadmap(result.roadmap);
+        
+        // Check if progress exists
+        const existingProgress = getRoadmapProgress();
+        if (existingProgress && existingProgress.careerName === decodeURIComponent(careerName)) {
+          setCompletedSkills(existingProgress.completedSkills);
+        } else {
+          // Initialize new progress
+          initializeRoadmapProgress(decodeURIComponent(careerName), result.roadmap);
+        }
       } catch (error: any) {
         console.error('Error:', error);
         toast.error('Failed to generate roadmap');
@@ -35,6 +46,16 @@ const RoadmapView = () => {
 
     fetchRoadmap();
   }, [careerName, navigate]);
+
+  const toggleSkillCompletion = (skill: string) => {
+    const isCompleted = completedSkills.includes(skill);
+    const updatedProgress = updateSkillProgress(skill, !isCompleted);
+    
+    if (updatedProgress) {
+      setCompletedSkills(updatedProgress.completedSkills);
+      toast.success(isCompleted ? 'Skill unmarked' : 'Skill completed! 🎉');
+    }
+  };
 
   if (loading) {
     return (
@@ -110,12 +131,26 @@ const RoadmapView = () => {
                     Skills to Learn
                   </h4>
                   <ul className="space-y-2">
-                    {phase.data.skills.map((skill, i) => (
-                      <li key={i} className="flex items-start space-x-2">
-                        <span className="text-primary-400 mt-1">•</span>
-                        <span className="text-dark-200">{skill}</span>
-                      </li>
-                    ))}
+                    {phase.data.skills.map((skill, i) => {
+                      const isCompleted = completedSkills.includes(skill);
+                      return (
+                        <li key={i} className="flex items-start space-x-2">
+                          <button
+                            onClick={() => toggleSkillCompletion(skill)}
+                            className="mt-1 hover:scale-110 transition-transform"
+                          >
+                            {isCompleted ? (
+                              <CheckCircle className="w-5 h-5 text-green-400" />
+                            ) : (
+                              <Circle className="w-5 h-5 text-dark-500" />
+                            )}
+                          </button>
+                          <span className={`${isCompleted ? 'text-green-300 line-through' : 'text-dark-200'}`}>
+                            {skill}
+                          </span>
+                        </li>
+                      );
+                    })}
                   </ul>
                 </div>
 
