@@ -48,8 +48,8 @@ export const callMockAI = async (systemPrompt: string, userPrompt: string): Prom
     });
   } else if (userPrompt.includes('Create a detailed 12-month roadmap')) {
     // Roadmap generation response
-    const careerMatch = userPrompt.match(/becoming a (.+?) in India/);
-    const careerName = careerMatch ? careerMatch[1] : 'Software Developer';
+    // Extract career name for potential future use
+    userPrompt.match(/becoming a (.+?) in India/);
     
     return JSON.stringify({
       "roadmap": {
