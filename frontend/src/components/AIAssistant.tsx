@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { MessageCircle, X, Send, Bot, User } from 'lucide-react';
-import axios from 'axios';
+import api from '../services/api';
 
 interface Message {
   id: string;
@@ -48,7 +48,7 @@ const AIAssistant = () => {
 
     try {
       // Call AI assistant API
-      const response = await axios.post('http://localhost:5000/api/assistant/chat', {
+      const response = await api.post('/assistant/chat', {
         message: inputMessage,
         history: messages.slice(-5), // Send last 5 messages for context
       });

@@ -4,7 +4,7 @@ import Navbar from '../components/Navbar';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { FileText, Download, Sparkles, User, Code, Lightbulb } from 'lucide-react';
 import toast from 'react-hot-toast';
-import axios from 'axios';
+import api from '../services/api';
 
 interface CVData {
   personalInfo: {
@@ -79,7 +79,7 @@ const CVGenerator = () => {
 
   const fetchSuggestions = async (text: string) => {
     try {
-      const response = await axios.post('http://localhost:5000/api/cv/suggestions', {
+      const response = await api.post('/cv/suggestions', {
         text,
         context: {
           role: cvData.experience[0]?.title || '',
@@ -122,7 +122,7 @@ const CVGenerator = () => {
 
     setGenerating(true);
     try {
-      const response = await axios.post('http://localhost:5000/api/cv/generate', cvData);
+      const response = await api.post('/cv/generate', cvData);
       
       if (response.data.success) {
         setGeneratedCV(response.data.cvUrl);
@@ -144,7 +144,7 @@ const CVGenerator = () => {
 
     setLoading(true);
     try {
-      const response = await axios.post('http://localhost:5000/api/cv/enhance', cvData);
+      const response = await api.post('/cv/enhance', cvData);
       
       if (response.data.success) {
         setCvData(response.data.enhancedData);

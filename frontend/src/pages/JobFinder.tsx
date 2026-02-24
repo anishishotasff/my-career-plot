@@ -4,7 +4,7 @@ import Navbar from '../components/Navbar';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { Search, MapPin, Briefcase, Clock, DollarSign, Building, ExternalLink, Filter, RefreshCw } from 'lucide-react';
 import toast from 'react-hot-toast';
-import axios from 'axios';
+import api from '../services/api';
 
 interface Job {
   id: string;
@@ -34,7 +34,7 @@ const JobFinder = () => {
   const fetchJobs = async (refresh: boolean = false) => {
     try {
       setLoading(true);
-      const response = await axios.get(`http://localhost:5000/api/jobs`, {
+      const response = await api.get(`/jobs`, {
         params: {
           search: searchQuery || undefined,
           category: selectedCategory !== 'All' ? selectedCategory : undefined,
