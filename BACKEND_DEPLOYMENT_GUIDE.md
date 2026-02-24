@@ -26,7 +26,7 @@
    Root Directory: backend
    Runtime: Node
    Build Command: npm install && npm run build
-   Start Command: npm start
+   Start Command:
    ```
 
 4. **Add Environment Variables**
