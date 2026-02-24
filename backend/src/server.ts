@@ -7,7 +7,6 @@ import path from 'path';
 import careerRoutes from './routes/careerRoutes';
 import roadmapRoutes from './routes/roadmapRoutes';
 import resumeRoutes from './routes/resumeRoutes';
-import authRoutes from './routes/authRoutes';
 import jobRoutes from './routes/jobRoutes';
 import assistantRoutes from './routes/assistantRoutes';
 import cvRoutes from './routes/cvRoutes';
@@ -59,7 +58,6 @@ app.get('/health', (req, res) => {
 app.use('/api', careerRoutes);
 app.use('/api', roadmapRoutes);
 app.use('/api', resumeRoutes);
-app.use('/api', authRoutes);
 app.use('/api/jobs', jobRoutes);
 app.use('/api/assistant', assistantRoutes);
 app.use('/api/cv', cvRoutes);
